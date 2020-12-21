@@ -1,0 +1,20 @@
+{% extends "payroll/base.html" %}
+{% block content %}
+{% load mathfilters %}
+    <article class="media content-section">
+        <div class="media-body">
+        <h5><a class="article-title" href="#">Monthly Salary Details </a></h5>
+        <h6><a class="article-title" href="#">Gross Salary </a></h6>
+        <p>Gross Salary : {{ gross_salary }}</p>
+        <p>Salary deduction  : {{ deduction }}</p>
+        <h6>Net Salary  : {{ gross_salary|sub:deduction }}</h6>
+        <p>Deduction reason  : {{ deduction_reason }}</p>
+        <h6><a class="article-title" href="#">Bank details</a></h6>
+        <p>Account Number : {{ accountno }}</p>
+        <p>IFSC code : {{ ifsc }}</p>
+        <p>Bank Name  : {{ bankname }}</p>
+        
+        </div>
+    </article>
+
+{% endblock content %}
