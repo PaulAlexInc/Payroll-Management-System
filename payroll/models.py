@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
 from PIL import Image
 # Create your models here.
@@ -76,3 +77,15 @@ class Profile(models.Model):
             output_size = (300,300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+class announcements(models.Model):
+    content = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+
+    @property
+    def getdate(self):
+        date = self.date_posted
+        return date.strftime('%A %d %B %Y')
+
+    def __str__(self):
+        return str(self.date_posted)

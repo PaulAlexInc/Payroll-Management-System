@@ -18,3 +18,24 @@
     </article>
 
 {% endblock content %}
+
+{% block head %}
+<div class="content-section">
+  <h3 style="justify-content: center;">Announcements</h3>
+  {% block anmts %}
+  <ul class="list-group">
+  {% for i in announcements %}                
+  <li class="list-group-item list-group-item-light">
+    <div>
+      <h5>{{i.content}}</h5>
+      {{i.getdate}}
+    </div>
+  </li>
+  {% endfor %}
+  <!-- <li class="list-group-item list-group-item-light">Calendars</li> -->
+  
+</ul>
+{% endblock anmts %}
+
+</div>
+{% endblock head %}

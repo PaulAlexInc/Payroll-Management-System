@@ -5,14 +5,22 @@ from .forms import ProfileUpdateForm
 from .models import *
 
 def home(request): #handles traffic from home page
-    return render(request, 'payroll/home.html')
+    a = announcements.objects.all()
+    context = {
+        'announcements' : a
+    }
+    return render(request, 'payroll/home.html', context)
 
 def about(request): #handles traffic from home page
-    return render(request, 'payroll/about.html', {'title' : 'About'})
+    a = announcements.objects.all()
+    context = {
+        'announcements' : a
+    }
+    return render(request, 'payroll/about.html', context)
 
 @login_required
 def profile(request):   #profile page
-    
+    a = announcements.objects.all()
     emp = Employee_details.objects.filter(user=request.user).first()
     schedule = Duty_Schedule.objects.filter(user=emp.user).first()
     print(request.user)
@@ -27,6 +35,7 @@ def profile(request):   #profile page
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
+        'announcements' : a,
         'p_form': p_form,
         'phone': emp.PhoneNo,
 	    'designation': emp.Designation,
@@ -42,11 +51,13 @@ def profile(request):   #profile page
 
 @login_required
 def attendance_leave(request): 
+    a = announcements.objects.all()
     emp = Employee_details.objects.filter(user=request.user).first()
     attendance = Attendance.objects.filter(user=emp.user).first()
     leave = Leave.objects.filter(user=emp.user).first()
     print(request.user)
     context = {
+        'announcements' : a,
         'name': emp.user.username,
         'email': emp.user.email,
         'empid': emp.Emp_id,
@@ -59,7 +70,7 @@ def attendance_leave(request):
 
 @login_required
 def salary(request): #handles traffic from home page
-    
+    a = announcements.objects.all()
     emp = Employee_details.objects.filter(user=request.user).first()
     leave = Leave.objects.filter(user=emp.user).first()
     ded = Deduction.objects.filter(user=emp.user).first()
@@ -67,6 +78,7 @@ def salary(request): #handles traffic from home page
 
     print(request.user)
     context = {
+        'announcements' : a,
         'name': emp.user.username,
         'email': emp.user.email,
         'gross_salary' : salary.Gross_Sal,

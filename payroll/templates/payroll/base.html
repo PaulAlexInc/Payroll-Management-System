@@ -64,17 +64,17 @@
             {% block content %}{% endblock %}
           </div>
           <div class="col-md-4">
-            <div class="content-section">
-              <h3>Information</h3>
+            
+              {% block head %}
+                        
+              
               <p class='text-muted'>
-                <ul class="list-group">
-                  
-                  <li class="list-group-item list-group-item-light">Announcements</li>
-                  <li class="list-group-item list-group-item-light">Calendars</li>
-                  
-                </ul>
+                {% block anmts %}
+                        
+                {% endblock %}
               </p>
-            </div>
+              {% endblock %}
+            
           </div>
         </div>
       </main>
