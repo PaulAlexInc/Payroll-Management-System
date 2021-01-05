@@ -5,12 +5,12 @@ from PIL import Image
 # Create your models here.
 class Employee_details(models.Model):
     
-    Emp_id = models.CharField(max_length=20, primary_key=True)
+    Emp_id = models.CharField(max_length=20, primary_key=True, default = 'None')
     
-    Designation = models.CharField(max_length=100)
-    Dept = models.CharField(max_length=100)
+    Designation = models.CharField(max_length=100, default = 'None')
+    Dept = models.CharField(max_length=100, default = 'None')
     
-    PhoneNo = models.CharField(max_length=100)
+    PhoneNo = models.CharField(max_length=100, default = 'None')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     def __str__(self):
         return str(self.user)
@@ -24,16 +24,16 @@ class Attendance(models.Model):
         return str(self.user)
     
 class Leave(models.Model):
-    Reason = models.CharField(max_length=20)
+    Reason = models.CharField(max_length=20, default = 'None')
     No_of_days = models.IntegerField(default=0)
-    From = models.DateTimeField('Starting From')
-    To = models.DateTimeField('Ending on')
+    From = models.DateTimeField(default=timezone.now)
+    To = models.DateTimeField(default=timezone.now)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
  
     def __str__(self):
         return str(self.user)
 class Deduction(models.Model):
-    Desc = models.CharField(max_length=200)
+    Desc = models.CharField(max_length=200, default = 'None')
     Ded_amt = models.IntegerField(default=0)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     def __str__(self):
@@ -41,9 +41,9 @@ class Deduction(models.Model):
         
 class Duty_Schedule(models.Model):
     
-    Month = models.CharField(max_length=20)
-    Time_in = models.TimeField('From')
-    Time_out = models.TimeField('To')
+    Month = models.CharField(max_length=20, default = 'None')
+    Time_in = models.TimeField(default='00:00')
+    Time_out = models.TimeField(default='00:00')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
  
     def __str__(self):
@@ -51,9 +51,9 @@ class Duty_Schedule(models.Model):
  
 class Salary_mgmt(models.Model):
     
-    AC_No = models.CharField(max_length=200)
-    IFSC = models.CharField(max_length=200)
-    Bank_name = models.CharField(max_length=200)
+    AC_No = models.CharField(max_length=200, default = 'None')
+    IFSC = models.CharField(max_length=200, default = 'None')
+    Bank_name = models.CharField(max_length=200, default = 'None')
     Gross_Sal = models.IntegerField(default=0)
     #Ded_amt = models.IntegerField(default=0)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -68,8 +68,8 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'    
         
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
 
         img = Image.open(self.image.path)
 
