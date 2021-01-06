@@ -5,8 +5,9 @@
       <div class="media">
         <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
         <div class="media-body">
-          <h2 class="account-heading">{{ user.username }}</h2>
-          <p class="text-secondary">{{ user.email }}</p>
+          <h2 class="account-heading">{{ name }}</h2>
+          <p class="text-secondary">Username : {{ user.username }}</p>
+          <p class="text-secondary">Email : {{ user.email }}</p>
         </div>
       </div>
     </div>
@@ -42,6 +43,16 @@
                 <button class="btn btn-outline-info" type="submit">Update</button>
             </div>  
       </div>
+      <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <p class="text-secondary">Delete Account</p>
+          </div>
+          <p>Perform this action only if you no longer belong to this organisation</p>
+          <a href="{% url 'confirmdelete' %}"><button type = "button" class="btn btn-outline-danger">Delete my account</button></a>
+        </div>
+      </article>
+      
 {% endblock content %}
 
 {% block head %}

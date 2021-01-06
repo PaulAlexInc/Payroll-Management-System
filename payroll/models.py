@@ -6,11 +6,10 @@ from PIL import Image
 class Employee_details(models.Model):
     
     Emp_id = models.CharField(max_length=20, primary_key=True, default = 'None')
-    
+    name = models.CharField(max_length=100, default = 'Enter name')
+    PhoneNo = models.CharField(max_length=100, default = 'Enter phone number')
     Designation = models.CharField(max_length=100, default = 'None')
     Dept = models.CharField(max_length=100, default = 'None')
-    
-    PhoneNo = models.CharField(max_length=100, default = 'None')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     def __str__(self):
         return str(self.user)
@@ -89,3 +88,11 @@ class announcements(models.Model):
 
     def __str__(self):
         return str(self.date_posted)
+
+class ex_employee(models.Model):
+    
+    name = models.CharField(max_length=100, default = 'None')
+    PhoneNo = models.CharField(max_length=100, default = 'None')
+
+    def __str__(self):
+        return str(self.name)

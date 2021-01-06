@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileUpdateForm
 from .models import *
+from django.contrib.auth.models import User
 
 def home(request): #handles traffic from home page
     a = announcements.objects.all()
@@ -37,9 +38,10 @@ def profile(request):   #profile page
     context = {
         'announcements' : a,
         'p_form': p_form,
+        'name': emp.name,
         'phone': emp.PhoneNo,
 	    'designation': emp.Designation,
-	    'name': emp.user.username,
+	    'username': emp.user.username,
         'email': emp.user.email,
 	    'empid': emp.Emp_id,
         'schedule_month': schedule.Month,
@@ -90,3 +92,14 @@ def salary(request): #handles traffic from home page
 
     }
     return render(request, 'payroll/salary.html', context)
+
+def deletetrigger(request):
+    return render(request, 'payroll/confirmdelete.html')
+    
+def delete(request):
+    user =  User.objects.get(username=request.user.username)
+    employee = Employee_details.objects.get(user=request.user)
+    ex = ex_employee.objects.create(name = employee.name, PhoneNo = employee.PhoneNo)
+    ex.save()
+    user.delete()
+    return render(request, 'payroll/deleted.html')
