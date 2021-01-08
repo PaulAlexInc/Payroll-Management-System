@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views # . ia the current directory
+from . import views # . is the current directory
 
 urlpatterns = [
     path('', views.home, name='payroll-home'),

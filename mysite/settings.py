@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'mathfilters',
     'payroll.apps.PayrollConfig',
     'crispy_forms',
     'django.contrib.admin',

@@ -75,7 +75,6 @@ def salary(request): #handles traffic from home page
     a = announcements.objects.all()
     emp = Employee_details.objects.filter(user=request.user).first()
     leave = Leave.objects.filter(user=emp.user).first()
-    ded = Deduction.objects.filter(user=emp.user).first()
     salary = Salary_mgmt.objects.filter(user=emp.user).first()
 
     print(request.user)
@@ -84,11 +83,12 @@ def salary(request): #handles traffic from home page
         'name': emp.user.username,
         'email': emp.user.email,
         'gross_salary' : salary.Gross_Sal,
-        'deduction' : ded.Ded_amt,
-        'deduction_reason' : ded.Desc,
+        'deduction' : salary.Ded_amt,
+        'deduction_reason' : salary.Desc,
         'accountno' : salary.AC_No,
         'ifsc' : salary.IFSC,
-        'bankname' : salary.Bank_name
+        'bankname' : salary.Bank_name,
+        'netsal' : salary.netsalary()
 
     }
     return render(request, 'payroll/salary.html', context)

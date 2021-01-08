@@ -31,12 +31,7 @@ class Leave(models.Model):
  
     def __str__(self):
         return str(self.user)
-class Deduction(models.Model):
-    Desc = models.CharField(max_length=200, default = 'None')
-    Ded_amt = models.IntegerField(default=0)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    def __str__(self):
-        return str(self.user)
+
         
 class Duty_Schedule(models.Model):
     
@@ -54,9 +49,13 @@ class Salary_mgmt(models.Model):
     IFSC = models.CharField(max_length=200, default = 'None')
     Bank_name = models.CharField(max_length=200, default = 'None')
     Gross_Sal = models.IntegerField(default=0)
-    #Ded_amt = models.IntegerField(default=0)
+    Ded_amt = models.IntegerField(default=0)
+    Desc = models.CharField(max_length=200, default = 'Deduction reason')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     
+    def netsalary(self): #stored procedure
+        return self.Gross_Sal-self.Ded_amt
+
     def __str__(self):
         return str(self.user)
  
@@ -96,3 +95,4 @@ class ex_employee(models.Model):
 
     def __str__(self):
         return str(self.name)
+
