@@ -50,7 +50,7 @@ class Salary_mgmt(models.Model):
     Bank_name = models.CharField(max_length=200, default = 'None')
     Gross_Sal = models.IntegerField(default=0)
     Ded_amt = models.IntegerField(default=0)
-    Desc = models.CharField(max_length=200, default = 'Deduction reason')
+    Desc = models.CharField(max_length=200, default = 'None')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     
     def netsalary(self): #stored procedure
