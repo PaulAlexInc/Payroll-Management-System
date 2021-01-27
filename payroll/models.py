@@ -45,7 +45,7 @@ class Duty_Schedule(models.Model):
  
 class Salary_mgmt(models.Model):
     
-    AC_No = models.CharField(max_length=200, default = 'None')
+    AC_No = models.CharField(max_length=200, primary_key=True, default = 'None')
     IFSC = models.CharField(max_length=200, default = 'None')
     Bank_name = models.CharField(max_length=200, default = 'None')
     Gross_Sal = models.IntegerField(default=0)
